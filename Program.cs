@@ -216,6 +216,8 @@ int main()
     return 0;
 }
 
+
+
 main();
 
 struct Receta
