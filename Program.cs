@@ -1,8 +1,4 @@
-﻿using System;
-using System.IO;
-
-
-Receta[] recetas = new Receta[50];
+﻿Receta[] recetas = new Receta[50];
 int cantidad = 0;
 string perfilActual = "";
 int platosPreparados = 0;
@@ -10,7 +6,6 @@ int platosPreparados = 0;
 string rutaSaludables = "recetasSaludables.txt";
 string rutaAprendizaje = "recetasAprendizaje.txt";
 
-// Metodo Main
 void Main()
 {
     CargarDatos();
@@ -26,16 +21,15 @@ void Main()
 Main();
 
 
-//Login
 void PantallaLogin()
 {
-    bool salirGlobal = false;
-    while (!salirGlobal)
+    bool salirLogin = false;
+    while (!salirLogin)
     {
         Console.Clear();
         Banner("BIENVENIDO A NUTRICOOK");
-        Console.WriteLine("  1. Perfil Saludable (Estilo de vida sano y control)");
-        Console.WriteLine("  2. Perfil de Aprendizaje (Aprender desde cero)");
+        Console.WriteLine("  1. Perfil Saludable");
+        Console.WriteLine("  2. Perfil de Aprendizaje");
         Console.WriteLine("  3. Salir\n");
         Console.Write("  Seleccione su perfil: ");
 
@@ -55,7 +49,7 @@ void PantallaLogin()
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("\nSaliendo de NutriCook. ¡Hasta pronto y buen provecho!");
             Console.ResetColor();
-            salirGlobal = true;
+            salirLogin = true;
         }
         else
         {
@@ -142,9 +136,9 @@ void AgregarReceta(string tipoPerfil)
 {
     Banner(tipoPerfil == "Saludable" ? "NUEVA RECETA FIT" : "NUEVA RECETA PASO A PASO");
 
-    if (cantidad >= LIMITE)
+    if (cantidad >= 50)
     {
-        MostrarError("Se ha alcanzado el límite máximo de recetas (" + LIMITE + ").");
+        MostrarError("Se ha alcanzado el límite máximo de recetas (" + 50 + ").");
         return;
     }
 
@@ -200,7 +194,8 @@ void MostrarRecetas()
         {
             hayRecetas = true;
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("  +-- #" + contadorVisual + " " + recetas[i].nombre + " [" + recetas[i].categoria + "] - " + recetas[i].tiempoPreparacion + " min");
+            Console.WriteLine("  +-- #" + contadorVisual + " " + recetas[i].nombre +
+                " [" + recetas[i].categoria + "] - " + recetas[i].tiempoPreparacion + " min");
             Console.ResetColor();
             Console.WriteLine("  |  Ingredientes : " + recetas[i].ingredientes);
             Console.WriteLine("  |  Pasos        :");
@@ -387,21 +382,21 @@ void LeerArchivo(string ruta, string cat)
 
 void CargarEjemplos()
 {
-    // ====== SEMILLA: SALUDABLES ======
+    // ====== SALUDABLE ======
     recetas[0].nombre = "Ensalada Mediterranea";
     recetas[0].ingredientes = "Lechuga, tomate, pepino, aceitunas, queso feta";
     recetas[0].pasos = "Lavar y cortar vegetales; Mezclar y agregar aceite de oliva";
     recetas[0].tiempoPreparacion = 10;
     recetas[0].categoria = "Saludable";
 
+    // ====== APRENDIZAJE ======
+    recetas[1].nombre = "Huevos Revueltos";
+    recetas[1].ingredientes = "2 huevos, sal, mantequilla, pimienta";
+    recetas[1].pasos = "Batir huevos; Calentar mantequilla; Cocinar a fuego bajo";
+    recetas[1].tiempoPreparacion = 5;
+    recetas[1].categoria = "Aprendizaje";
 
-    // ====== SEMILLA: APRENDIZAJE ======
-    recetas[2].nombre = "Huevos Revueltos";
-    recetas[2].ingredientes = "2 huevos, sal, mantequilla, pimienta";
-    recetas[2].pasos = "Batir huevos; Calentar mantequilla; Cocinar a fuego bajo";
-    recetas[2].tiempoPreparacion = 5;
-    recetas[2].categoria = "Aprendizaje";
-    cantidad = 12;
+    cantidad = 2;
 }
 
 
